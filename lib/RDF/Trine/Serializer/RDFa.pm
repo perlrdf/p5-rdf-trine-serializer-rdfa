@@ -1,8 +1,9 @@
+package RDF::Trine::Serializer::RDFa;
+
 use 5.010001;
 use strict;
 use warnings;
 
-package RDF::Trine::Serializer::RDFa;
 
 our $AUTHORITY = 'cpan:KJETILK';
 our $VERSION   = '0.001';
@@ -36,7 +37,7 @@ Kjetil Kjernsmo E<lt>kjetilk@cpan.orgE<gt>.
 
 =head1 COPYRIGHT AND LICENCE
 
-This software is copyright (c) 2017 by Kjetil Kjernsmo.
+This software is copyright (c) 2017, 2018 by Kjetil Kjernsmo.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
