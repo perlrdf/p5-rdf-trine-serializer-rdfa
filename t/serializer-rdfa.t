@@ -1,6 +1,7 @@
 #!/usr/bin/env perl
 
 use strict;
+use Test::More;
 use Test::Modern;
 
 use_ok('RDF::Trine::Serializer');
@@ -15,15 +16,32 @@ $parser->parse_into_model('http://example.org/', $testdata, $testmodel );
 
 
 subtest 'Default generator' => sub {
-  my $s = RDF::Trine::Serializer::RDFa->new('');
-  isa_ok('RDF::Trine::Serializer');
-  isa_ok('RDF::Trine::Serializer::RDFa');
-  my $str = $s->serialize_model_to_string($testmodel);
-  tests($str);
+  ok(my $s = RDF::Trine::Serializer::RDFa->new(), 'Assignment OK');
+  isa_ok($s, 'RDF::Trine::Serializer');
+  isa_ok($s, 'RDF::Trine::Serializer::RDFa');
+  my $string = $s->serialize_model_to_string($testmodel);
+  tests($string);
   like($string, qr|resource="http://example.org/Bar"|, 'Object present');
   like($string, qr|property="ex:title" content="Dahut"|, 'Literals OK');
 };
 
+
+subtest 'Hidden generator' => sub {
+  ok(my $s = RDF::Trine::Serializer::RDFa->new(generator => 'HTML::Hidden'), 'Assignment OK');
+  isa_ok($s, 'RDF::Trine::Serializer::RDFa');
+  my $string = $s->serialize_model_to_string($testmodel);
+  tests($string);
+  like($string, qr|resource="http://example.org/Bar"|, 'Object present');
+  like($string, qr|property="ex:title" content="Dahut"|, 'Literals OK');
+};
+
+subtest 'Pretty generator' => sub {
+  ok(my $s = RDF::Trine::Serializer::RDFa->new(generator => 'HTML::Pretty'), 'Assignment OK');
+  isa_ok($s, 'RDF::Trine::Serializer::RDFa');
+  my $string = $s->serialize_model_to_string($testmodel);
+  tests($string);
+  like($string, qr|<dd property="ex:title" class="typed-literal" datatype="xsd:langString">Dahut</dd>|, 'Literals OK');
+};
 
 sub tests {
   my $string = shift;
