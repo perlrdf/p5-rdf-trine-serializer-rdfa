@@ -1,10 +1,10 @@
 # This file acts as the project's changelog.
 
 `RDF-Trine-Serializer-RDFa 0.01 cpan:KJETILK`
-	issued  2018-01-16;
-        label   "Initial release".
-
+    issued  2018-01-16;
+    label   "Initial release".
+    
 `RDF-Trine-Serializer-RDFa 0.02 cpan:KJETILK`
-	issued  2018-01-16;
-	label   "Improve documentation".
+    issued  2018-01-16;
+    label   "Improve documentation".
 
