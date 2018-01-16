@@ -80,7 +80,7 @@ RDF::Trine::Serializer::RDFa - RDFa Serializer for RDF::Trine
 =head1 BUGS
 
 Please report any bugs to
-L<http://rt.cpan.org/Dist/Display.html?Queue=RDF-Trine-Serializer-RDFa>.
+L<https://github.com/kjetilk/p5-rdf-trine-serializer-rdfa/issues>.
 
 =head1 SEE ALSO
 
