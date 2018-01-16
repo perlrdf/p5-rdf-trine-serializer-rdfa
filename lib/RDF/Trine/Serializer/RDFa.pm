@@ -89,7 +89,9 @@ use it, but not require them as dependencies.
 Beyond the methods documented below, this class inherits methods from the
 L<RDF::Trine::Serializer> class.
 
-=over =item C<< new >>
+=over
+
+=item C<< new >>
 
 Returns a new RDFa serializer object. It can any arguments are passed
 on to L<RDF::RDFa::Generator>, see it's documentation for
