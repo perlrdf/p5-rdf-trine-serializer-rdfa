@@ -2,12 +2,9 @@
 
 use strict;
 use Test::More;
-use Test::Modern;
 
-#use_ok('RDF::Trine::Serializer');
-use RDF::Trine::Serializer;
-#use_ok('RDF::Trine::Serializer::RDFa');
-use RDF::Trine::Serializer::RDFa;
+use_ok('RDF::Trine::Serializer');
+use_ok('RDF::Trine::Serializer::RDFa');
 
 my $testmodel = RDF::Trine::Model->temporary_model;
 my $parser = RDF::Trine::Parser->new( 'turtle' );
@@ -41,7 +38,7 @@ subtest 'Pretty generator' => sub {
   isa_ok($s, 'RDF::Trine::Serializer::RDFa');
   my $string = $s->serialize_model_to_string($testmodel);
   tests($string);
-  like($string, qr|<dd property="ex:title" class="typed-literal" datatype="xsd:langString">Dahut</dd>|, 'Literals OK');
+  like($string, qr|<dd property="ex:title" class="plain-literal" xml:lang="fr">Dahut</dd>|, 'Literals OK');
 };
 
 sub tests {
