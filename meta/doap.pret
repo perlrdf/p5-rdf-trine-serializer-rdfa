@@ -1,18 +1,24 @@
 # This file contains general metadata about the project.
 
 @prefix : <http://usefulinc.com/ns/doap#>.
+@prefix prov: <http://www.w3.org/ns/prov#>.
 
 `RDF-Trine-Serializer-RDFa`
-	:programming-language "Perl" ;
-	:shortdesc            "RDFa Serializer for RDF::Trine";
-	:homepage             <https://metacpan.org/release/RDF-Trine-Serializer-RDFa>;
-	:download-page        <https://metacpan.org/release/RDF-Trine-Serializer-RDFa>;
-	:bug-database         <https://github.com/kjetilk/p5-rdf-trine-serializer-rdfa/issues>;
-#	:repository           [ a :GitRepository; :browse <https://github.com/kjetilk/p5-rdf-trine-serializer-rdfa> ];
-	:created              2017-12-22;
-	:license              <http://dev.perl.org/licenses/>;
-	:maintainer           cpan:KJETILK;
-	:developer            cpan:KJETILK.
+    :programming-language "Perl" ;
+    :shortdesc            "RDFa Serializer for RDF::Trine";
+    :homepage             <https://metacpan.org/release/RDF-Trine-Serializer-RDFa>;
+    :download-page        <https://metacpan.org/release/RDF-Trine-Serializer-RDFa>;
+    :bug-database         <https://github.com/kjetilk/p5-rdf-trine-serializer-rdfa/issues>;
+    :repository           [ a :GitRepository;
+        :browse <https://github.com/kjetilk/p5-rdf-trine-serializer-rdfa>
+        prov:has_provenance <http://git2prov.org/git2prov?giturl=https%3A%2F%2Fgithub.com%2Fkjetilk%2Fp5-rdf-trine-serializer-rdfa&serialization=PROV-O#>
+        ];
+    :support-forum  <irc://irc.perl.org/#perlrdf> ;
+    :category             <http://dbpedia.org/resource/Category:Semantic_Web> ;
+    :created              2017-12-22;
+    :license              <http://dev.perl.org/licenses/>;
+    :maintainer           cpan:KJETILK;
+    :developer            cpan:KJETILK.
 
 <http://dev.perl.org/licenses/>
 	dc:title  "the same terms as the perl 5 programming language system itself".
