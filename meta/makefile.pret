@@ -3,6 +3,7 @@
 @prefix : <http://ontologi.es/doap-deps#>.
 
 `RDF-Trine-Serializer-RDFa`
+    :runtime-requirement    [ :on "perl 5.010001"^^:CpanId ];
     :runtime-requirement    [ :on "RDF::Trine 0.133"^^:CpanId ];
     :runtime-requirement    [ :on "RDF::RDFa::Generator 0.102"^^:CpanId; ];
     :test-requirement       [ :on "Test::More 0.96"^^:CpanId ];
