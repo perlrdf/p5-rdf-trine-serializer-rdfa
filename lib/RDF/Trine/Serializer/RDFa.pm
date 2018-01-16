@@ -68,7 +68,49 @@ RDF::Trine::Serializer::RDFa - RDFa Serializer for RDF::Trine
 
 =head1 SYNOPSIS
 
+ use RDF::Trine::Serializer;
+
+ my $s = RDF::Trine::Serializer->new('RDFa', style => 'HTML::Hidden');
+ my $string = $s->serialize_model_to_string($model);
+
 =head1 DESCRIPTION
+
+The L<RDF::Trine::Serializer> class provides an API for serializing
+RDF graphs to strings and files. This subclass provides RDFa
+serialization via L<RDF::RDFa::Generator>.
+
+
+=head1 METHODS
+
+Beyond the methods documented below, this class inherits methods from the
+L<RDF::Trine::Serializer> class.
+
+=over =item C<< new >>
+
+Returns a new RDFa serializer object. It can any arguments are passed
+on to L<RDF::RDFa::Generator>, see it's documentation for
+details. This includes a C<style> argument that names a module that
+formats the output.
+
+=item C<< serialize_model_to_file ( $fh, $model ) >>
+
+Serializes the C<$model> to RDFa, printing the results to the supplied
+filehandle C<<$fh>>.
+
+=item C<< serialize_model_to_string ( $model ) >>
+
+Serializes the C<$model> to RDFa, returning the result as a string.
+
+=item C<< serialize_iterator_to_file ( $file, $iter ) >>
+
+Serializes the iterator to RDFa, printing the results to the supplied
+filehandle C<<$fh>>.
+
+=item C<< serialize_iterator_to_string ( $iter ) >>
+
+Serializes the iterator to RDFa, returning the result as a string.
+
+=back
 
 =head1 BUGS
 
