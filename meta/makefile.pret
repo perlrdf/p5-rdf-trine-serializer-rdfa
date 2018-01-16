@@ -3,7 +3,9 @@
 @prefix : <http://ontologi.es/doap-deps#>.
 
 `RDF-Trine-Serializer-RDFa`
-	:test-requirement       [ :on "Test::More 0.96"^^:CpanId ];
-	:develop-recommendation [ :on "Dist::Inkt 0.001"^^:CpanId ];
-	.
+    :runtime-requirement    [ :on "RDF::Trine 0.133"^^:CpanId ];
+    :runtime-requirement    [ :on "RDF::RDFa::Generator 0.102"^^:CpanId; ];
+    :test-requirement       [ :on "Test::More 0.96"^^:CpanId ];
+    :develop-recommendation [ :on "Dist::Inkt 0.001"^^:CpanId ];
+    .
 
