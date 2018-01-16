@@ -4,8 +4,10 @@ use strict;
 use Test::More;
 use Test::Modern;
 
-use_ok('RDF::Trine::Serializer');
-use_ok('RDF::Trine::Serializer::RDFa');
+#use_ok('RDF::Trine::Serializer');
+use RDF::Trine::Serializer;
+#use_ok('RDF::Trine::Serializer::RDFa');
+use RDF::Trine::Serializer::RDFa;
 
 my $testmodel = RDF::Trine::Model->temporary_model;
 my $parser = RDF::Trine::Parser->new( 'turtle' );
@@ -14,9 +16,8 @@ my $testdata = '<http://example.org/foo> a <http://example.org/Bar> ; <http://ex
 
 $parser->parse_into_model('http://example.org/', $testdata, $testmodel );
 
-
 subtest 'Default generator' => sub {
-  ok(my $s = RDF::Trine::Serializer::RDFa->new(), 'Assignment OK');
+  ok(my $s = RDF::Trine::Serializer->new('RDFa'), 'Assignment OK');
   isa_ok($s, 'RDF::Trine::Serializer');
   isa_ok($s, 'RDF::Trine::Serializer::RDFa');
   my $string = $s->serialize_model_to_string($testmodel);
@@ -27,7 +28,7 @@ subtest 'Default generator' => sub {
 
 
 subtest 'Hidden generator' => sub {
-  ok(my $s = RDF::Trine::Serializer::RDFa->new(generator => 'HTML::Hidden'), 'Assignment OK');
+  ok(my $s = RDF::Trine::Serializer->new('RDFa', style => 'HTML::Hidden'), 'Assignment OK');
   isa_ok($s, 'RDF::Trine::Serializer::RDFa');
   my $string = $s->serialize_model_to_string($testmodel);
   tests($string);
@@ -36,7 +37,7 @@ subtest 'Hidden generator' => sub {
 };
 
 subtest 'Pretty generator' => sub {
-  ok(my $s = RDF::Trine::Serializer::RDFa->new(generator => 'HTML::Pretty'), 'Assignment OK');
+  ok(my $s = RDF::Trine::Serializer->new('RDFa', style => 'HTML::Pretty'), 'Assignment OK');
   isa_ok($s, 'RDF::Trine::Serializer::RDFa');
   my $string = $s->serialize_model_to_string($testmodel);
   tests($string);
