@@ -3,10 +3,55 @@ package RDF::Trine::Serializer::RDFa;
 use 5.010001;
 use strict;
 use warnings;
+use base qw(RDF::Trine::Serializer);
 
 
 our $AUTHORITY = 'cpan:KJETILK';
-our $VERSION   = '0.001';
+our ($VERSION);
+BEGIN {
+	$VERSION	= '0.01';
+	$RDF::Trine::Serializer::serializer_names{ 'rdfa' }	= __PACKAGE__;
+	$RDF::Trine::Serializer::format_uris{ 'http://www.w3.org/ns/formats/RDFa' }	= __PACKAGE__;
+	foreach my $type (qw(application/xhtml+xml text/html)) {
+		$RDF::Trine::Serializer::media_types{ $type }	= __PACKAGE__;
+	}
+}
+
+
+sub serialize_model_to_string
+{
+	my ($proto, $model) = @_;
+	return $proto->create_document($model)->toString;
+}
+
+sub serialize_model_to_file
+{
+	my ($proto, $fh, $model) = @_;
+	print {$fh} $proto->create_document($model)->toString;
+}
+
+sub serialize_iterator_to_string
+{
+	my ($proto, $iter) = @_;
+	my $model = RDF::Trine::Model->temporary_model;
+	while (my $st = $iter->next)
+	{
+		$model->add_statement($st);
+	}
+	return $proto->serialize_model_to_string($model);
+}
+
+sub serialize_iterator_to_file
+{
+	my ($proto, $fh, $iter) = @_;
+	my $model = RDF::Trine::Model->temporary_model;
+	while (my $st = $iter->next)
+	{
+		$model->add_statement($st);
+	}
+	return $proto->serialize_model_to_file($fh, $model);
+}
+
 
 1;
 
