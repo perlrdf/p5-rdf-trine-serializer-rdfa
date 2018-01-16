@@ -19,44 +19,38 @@ BEGIN {
 
 
 sub new {
-	my ($class, %args) = @_;
-	my $gen = RDF::RDFa::Generator->new(%args); 
-	my $self = bless( { gen => $gen }, $class);
-	return $self;
+  my ($class, %args) = @_;
+  my $gen = RDF::RDFa::Generator->new(%args); 
+  my $self = bless( { gen => $gen }, $class);
+  return $self;
 }
 
-sub serialize_model_to_string
-{
-	my ($self, $model) = @_;
-	return $self->{gen}->create_document($model)->toString;
+sub serialize_model_to_string {
+  my ($self, $model) = @_;
+  return $self->{gen}->create_document($model)->toString;
 }
 
-sub serialize_model_to_file
-{
-	my ($self, $fh, $model) = @_;
-	print {$fh} $self->{gen}->create_document($model)->toString;
+sub serialize_model_to_file {
+  my ($self, $fh, $model) = @_;
+  print {$fh} $self->{gen}->create_document($model)->toString;
 }
 
-sub serialize_iterator_to_string
-{
-	my ($self, $iter) = @_;
-	my $model = RDF::Trine::Model->temporary_model;
-	while (my $st = $iter->next)
-	{
-		$model->add_statement($st);
-	}
-	return $self->{gen}->serialize_model_to_string($model);
+sub serialize_iterator_to_string {
+  my ($self, $iter) = @_;
+  my $model = RDF::Trine::Model->temporary_model;
+  while (my $st = $iter->next) {
+	 $model->add_statement($st);
+  }
+  return $self->{gen}->serialize_model_to_string($model);
 }
 
-sub serialize_iterator_to_file
-{
-	my ($self, $fh, $iter) = @_;
-	my $model = RDF::Trine::Model->temporary_model;
-	while (my $st = $iter->next)
-	{
-		$model->add_statement($st);
-	}
-	return $self->{gen}->serialize_model_to_file($fh, $model);
+sub serialize_iterator_to_file {
+  my ($self, $fh, $iter) = @_;
+  my $model = RDF::Trine::Model->temporary_model;
+  while (my $st = $iter->next) {
+	 $model->add_statement($st);
+  }
+  return $self->{gen}->serialize_model_to_file($fh, $model);
 }
 
 
