@@ -4,7 +4,7 @@ use 5.010001;
 use strict;
 use warnings;
 use base qw(RDF::Trine::Serializer);
-
+use RDF::RDFa::Generator;
 
 our $AUTHORITY = 'cpan:KJETILK';
 our ($VERSION);
@@ -18,38 +18,46 @@ BEGIN {
 }
 
 
+sub new {
+	my $class	= shift;
+	my %args	= @_;
+	my $gen = RDF::RDFa::Generator->new; 
+	my $self = bless( { gen => $gen }, $class);
+	return $self;
+}
+
 sub serialize_model_to_string
 {
-	my ($proto, $model) = @_;
-	return $proto->create_document($model)->toString;
+	my ($self, $model) = @_;
+	return $self->{gen}->create_document($model)->toString;
 }
 
 sub serialize_model_to_file
 {
-	my ($proto, $fh, $model) = @_;
-	print {$fh} $proto->create_document($model)->toString;
+	my ($self, $fh, $model) = @_;
+	print {$fh} $self->{gen}->create_document($model)->toString;
 }
 
 sub serialize_iterator_to_string
 {
-	my ($proto, $iter) = @_;
+	my ($self, $iter) = @_;
 	my $model = RDF::Trine::Model->temporary_model;
 	while (my $st = $iter->next)
 	{
 		$model->add_statement($st);
 	}
-	return $proto->serialize_model_to_string($model);
+	return $self->{gen}->serialize_model_to_string($model);
 }
 
 sub serialize_iterator_to_file
 {
-	my ($proto, $fh, $iter) = @_;
+	my ($self, $fh, $iter) = @_;
 	my $model = RDF::Trine::Model->temporary_model;
 	while (my $st = $iter->next)
 	{
 		$model->add_statement($st);
 	}
-	return $proto->serialize_model_to_file($fh, $model);
+	return $self->{gen}->serialize_model_to_file($fh, $model);
 }
 
 
