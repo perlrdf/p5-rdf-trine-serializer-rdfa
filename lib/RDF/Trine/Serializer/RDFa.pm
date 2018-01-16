@@ -21,7 +21,7 @@ BEGIN {
 sub new {
 	my $class	= shift;
 	my %args	= @_;
-	my $gen = RDF::RDFa::Generator->new; 
+	my $gen = RDF::RDFa::Generator->new(%args); 
 	my $self = bless( { gen => $gen }, $class);
 	return $self;
 }
