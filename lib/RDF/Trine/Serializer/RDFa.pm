@@ -9,18 +9,17 @@ use RDF::RDFa::Generator;
 our $AUTHORITY = 'cpan:KJETILK';
 our ($VERSION);
 BEGIN {
-	$VERSION	= '0.01';
-	$RDF::Trine::Serializer::serializer_names{ 'rdfa' }	= __PACKAGE__;
-	$RDF::Trine::Serializer::format_uris{ 'http://www.w3.org/ns/formats/RDFa' }	= __PACKAGE__;
-	foreach my $type (qw(application/xhtml+xml text/html)) {
-		$RDF::Trine::Serializer::media_types{ $type }	= __PACKAGE__;
-	}
+  $VERSION = '0.01';
+  $RDF::Trine::Serializer::serializer_names{ 'rdfa' } = __PACKAGE__;
+  $RDF::Trine::Serializer::format_uris{ 'http://www.w3.org/ns/formats/RDFa' } = __PACKAGE__;
+  foreach my $type (qw(application/xhtml+xml text/html)) {
+	 $RDF::Trine::Serializer::media_types{ $type } = __PACKAGE__;
+  }
 }
 
 
 sub new {
-	my $class	= shift;
-	my %args	= @_;
+	my ($class, %args) = @_;
 	my $gen = RDF::RDFa::Generator->new(%args); 
 	my $self = bless( { gen => $gen }, $class);
 	return $self;
