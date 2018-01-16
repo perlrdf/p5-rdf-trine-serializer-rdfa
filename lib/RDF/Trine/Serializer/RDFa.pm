@@ -79,6 +79,10 @@ The L<RDF::Trine::Serializer> class provides an API for serializing
 RDF graphs to strings and files. This subclass provides RDFa
 serialization via L<RDF::RDFa::Generator>.
 
+It is intended that this module will replace the RDF::Trine
+compatibility methods in L<RDF::RDFa::Generator>, which are now
+deprecated. This is done to allow both L<RDF::Trine> and L<Attean> to
+use it, but not require them as dependencies.
 
 =head1 METHODS
 
@@ -118,6 +122,14 @@ Please report any bugs to
 L<https://github.com/kjetilk/p5-rdf-trine-serializer-rdfa/issues>.
 
 =head1 SEE ALSO
+
+L<RDF::RDFa::Generator>, L<RDF::Trine>, L<Attean>
+
+=head1 ACKNOWLEDGEMENTS
+
+This module is mostly a straightforward port with substantial
+cutnpaste from L<RDF::RDFa::Generator> and L<RDF::Trine> by Toby
+Inkster and Gregory Todd Williams respectively.
 
 =head1 AUTHOR
 
