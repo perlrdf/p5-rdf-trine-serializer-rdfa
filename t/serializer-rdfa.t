@@ -2,6 +2,7 @@
 
 use strict;
 use Test::More;
+use Test::RDF;
 
 use_ok('RDF::Trine::Serializer');
 use_ok('RDF::Trine::Serializer::RDFa');
@@ -44,6 +45,7 @@ subtest 'Pretty generator' => sub {
 
 sub tests {
   my $string = shift;
+  is_valid_rdf($string, 'rdfa',  'RDFa is syntactically valid');
   like($string, qr|about="http://example.org/foo"|, 'Subject URI present');
   like($string, qr|rel="rdf:type"|, 'Type predicate present');
   like($string, qr|property="ex:pi"|, 'pi predicate present');
