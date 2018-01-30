@@ -5,7 +5,7 @@
 `RDF-Trine-Serializer-RDFa`
     :runtime-requirement    [ :on "perl 5.010001"^^:CpanId ];
     :runtime-requirement    [ :on "RDF::Trine 0.133"^^:CpanId ];
-    :runtime-requirement    [ :on "RDF::RDFa::Generator 0.102"^^:CpanId; ];
+    :runtime-requirement    [ :on "RDF::RDFa::Generator 0.199_02"^^:CpanId; ];
     :test-requirement       [ :on "Test::More 0.96"^^:CpanId ];
     :test-requirement       [ :on "Test::RDF"^^:CpanId ];
     :develop-recommendation [ :on "Dist::Inkt 0.001"^^:CpanId ];
