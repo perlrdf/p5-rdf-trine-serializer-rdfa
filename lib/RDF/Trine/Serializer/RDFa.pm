@@ -5,6 +5,8 @@ use strict;
 use warnings;
 use base qw(RDF::Trine::Serializer);
 use RDF::RDFa::Generator;
+use RDF::TrineX::Compatibility::Attean;
+
 
 our $AUTHORITY = 'cpan:KJETILK';
 our ($VERSION);
