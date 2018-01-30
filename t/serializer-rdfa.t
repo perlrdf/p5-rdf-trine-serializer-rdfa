@@ -3,6 +3,7 @@
 use strict;
 use Test::More;
 use Test::RDF;
+use RDF::Trine qw(iri);
 
 use_ok('RDF::Trine::Serializer');
 use_ok('RDF::Trine::Serializer::RDFa');
@@ -42,6 +43,30 @@ subtest 'Pretty generator' => sub {
   like($string, qr|<dd property="ex:title" class="typed-literal" xml:lang="fr" datatype="rdf:langString">Dahut</dd>|, 'Language literals OK');
   like($string, qr|<dd property="ex:else" class="typed-literal" datatype="xsd:string">Foo</dd>|, '"Plain" Literal OK');
 };
+
+subtest 'Pretty generator with interlink' => sub {
+  ok(my $s = RDF::Trine::Serializer->new('RDFa',
+													  style => 'HTML::Pretty',
+													  generator_options => {interlink => 1, id_prefix => 'test'}),
+	  'Assignment OK');
+  my $string = $s->serialize_model_to_string($testmodel);
+  tests($string);
+  like($string, qr|<main>\s?<div|, 'div element just local part');
+  like($string, qr|<dd property="ex:title" class="typed-literal" xml:lang="fr" datatype="rdf:langString">Dahut</dd>|, 'Literals OK');
+};
+
+subtest 'Pretty generator with Note' => sub {
+  ok(my $note = RDF::RDFa::Generator::HTML::Pretty::Note->new(iri('http://example.org/foo'), 'This is a Note'), 'Note creation OK');
+  ok(my $s = RDF::Trine::Serializer->new('RDFa',
+													  style => 'HTML::Pretty',
+													  generator_options => {notes => [$note]}),
+	  'Assignment OK');
+  my $string = $s->serialize_model_to_string($testmodel);
+  tests($string);
+  like($string, qr|<aside>|, 'aside element found');
+  like($string, qr|This is a Note|, 'Note text found');
+};
+
 
 sub tests {
   my $string = shift;
