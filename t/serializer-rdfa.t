@@ -38,7 +38,8 @@ subtest 'Pretty generator' => sub {
   isa_ok($s, 'RDF::Trine::Serializer::RDFa');
   my $string = $s->serialize_model_to_string($testmodel);
   tests($string);
-  like($string, qr|<dd property="ex:title" class="plain-literal" xml:lang="fr">Dahut</dd>|, 'Literals OK');
+  like($string, qr|<dd property="ex:title" class="typed-literal" xml:lang="fr" datatype="rdf:langString">Dahut</dd>|, 'Language literals OK');
+  like($string, qr|<dd property="ex:else" class="typed-literal" datatype="xsd:string">Foo</dd>|, '"Plain" Literal OK');
 };
 
 sub tests {
