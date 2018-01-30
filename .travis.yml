@@ -16,6 +16,8 @@ install:
   - cpan-install --toolchain
   - cpan-install --deps
   - cpan-install --coverage
+  - cpanm --notest KJETILK/RDF-NS-Curated-0.006_02.tar.gz
+  - cpanm --notest KJETILK/RDF-RDFa-Generator-0.199_04.tar.gz
 before_script:
   - coverage-setup
 script:
