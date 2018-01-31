@@ -20,15 +20,15 @@ subtest 'Default generator' => sub {
   isa_ok($s, 'RDF::Trine::Serializer');
   isa_ok($s, 'RDF::Trine::Serializer::RDFa');
   my $string = $s->serialize_model_to_string($testmodel);
-  tests($string);
+  is_valid_rdf($string, 'rdfa',  'RDFa is syntactically valid');
   like($string, qr|resource="http://example.org/Bar"|, 'Object present');
-  like($string, qr|property="ex:title" content="Dahut"|, 'Literals OK');
+  like($string, qr|property="http://example.org/title" content="Dahut"|, 'Literals OK');
 };
 
 my $ns = URI::NamespaceMap->new( { ex => iri('http://example.org/') });
 
 subtest 'Hidden generator' => sub {
-  ok(my $s = RDF::Trine::Serializer->new('RDFa', style => 'HTML::Hidden'), 'Assignment OK');
+  ok(my $s = RDF::Trine::Serializer->new('RDFa', style => 'HTML::Hidden', namespacemap => $ns), 'Assignment OK');
   isa_ok($s, 'RDF::Trine::Serializer::RDFa');
   my $string = $s->serialize_model_to_string($testmodel);
   tests($string);
