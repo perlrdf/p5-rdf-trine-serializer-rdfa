@@ -25,6 +25,7 @@ subtest 'Default generator' => sub {
   like($string, qr|property="ex:title" content="Dahut"|, 'Literals OK');
 };
 
+my $ns = URI::NamespaceMap->new( { ex => iri('http://example.org/') });
 
 subtest 'Hidden generator' => sub {
   ok(my $s = RDF::Trine::Serializer->new('RDFa', style => 'HTML::Hidden'), 'Assignment OK');
@@ -36,7 +37,7 @@ subtest 'Hidden generator' => sub {
 };
 
 subtest 'Pretty generator' => sub {
-  ok(my $s = RDF::Trine::Serializer->new('RDFa', style => 'HTML::Pretty'), 'Assignment OK');
+  ok(my $s = RDF::Trine::Serializer->new('RDFa', style => 'HTML::Pretty', namespacemap => $ns), 'Assignment OK');
   isa_ok($s, 'RDF::Trine::Serializer::RDFa');
   my $string = $s->serialize_model_to_string($testmodel);
   tests($string);
@@ -46,6 +47,7 @@ subtest 'Pretty generator' => sub {
 
 subtest 'Pretty generator with interlink' => sub {
   ok(my $s = RDF::Trine::Serializer->new('RDFa',
+													  namespacemap => $ns,
 													  style => 'HTML::Pretty',
 													  generator_options => {interlink => 1, id_prefix => 'test'}),
 	  'Assignment OK');
@@ -58,6 +60,7 @@ subtest 'Pretty generator with interlink' => sub {
 subtest 'Pretty generator with Note' => sub {
   ok(my $note = RDF::RDFa::Generator::HTML::Pretty::Note->new(iri('http://example.org/foo'), 'This is a Note'), 'Note creation OK');
   ok(my $s = RDF::Trine::Serializer->new('RDFa',
+													  namespacemap => $ns,
 													  style => 'HTML::Pretty',
 													  generator_options => {notes => [$note]}),
 	  'Assignment OK');
