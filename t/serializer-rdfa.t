@@ -8,6 +8,10 @@ use RDF::Trine qw(iri);
 use_ok('RDF::Trine::Serializer');
 use_ok('RDF::Trine::Serializer::RDFa');
 
+use Module::Load::Conditional qw[check_install];
+
+my $rdfns = check_install( module => 'RDF::NS', version => 20130802);
+
 my $testmodel = RDF::Trine::Model->temporary_model;
 my $parser = RDF::Trine::Parser->new( 'turtle' );
 
@@ -16,19 +20,20 @@ my $testdata = '<http://example.org/foo> a <http://example.org/Bar> ; <http://ex
 $parser->parse_into_model('http://example.org/', $testdata, $testmodel );
 
 subtest 'Default generator' => sub {
+  plan skip_all => 'RDF::NS is not installed' unless $rdfns;
   ok(my $s = RDF::Trine::Serializer->new('RDFa'), 'Assignment OK');
   isa_ok($s, 'RDF::Trine::Serializer');
   isa_ok($s, 'RDF::Trine::Serializer::RDFa');
   my $string = $s->serialize_model_to_string($testmodel);
-  is_valid_rdf($string, 'rdfa',  'RDFa is syntactically valid');
+  tests($string);
   like($string, qr|resource="http://example.org/Bar"|, 'Object present');
-  like($string, qr|property="http://example.org/title" content="Dahut"|, 'Literals OK');
+  like($string, qr|property="ex:title" content="Dahut"|, 'Literals OK');
 };
 
 my $ns = URI::NamespaceMap->new( { ex => iri('http://example.org/') });
 
 subtest 'Hidden generator' => sub {
-  ok(my $s = RDF::Trine::Serializer->new('RDFa', style => 'HTML::Hidden', namespacemap => $ns), 'Assignment OK');
+  ok(my $s = RDF::Trine::Serializer->new('RDFa', style => 'HTML::Hidden'), 'Assignment OK');
   isa_ok($s, 'RDF::Trine::Serializer::RDFa');
   my $string = $s->serialize_model_to_string($testmodel);
   tests($string);
@@ -60,7 +65,6 @@ subtest 'Pretty generator with interlink' => sub {
 subtest 'Pretty generator with Note' => sub {
   ok(my $note = RDF::RDFa::Generator::HTML::Pretty::Note->new(iri('http://example.org/foo'), 'This is a Note'), 'Note creation OK');
   ok(my $s = RDF::Trine::Serializer->new('RDFa',
-													  namespacemap => $ns,
 													  style => 'HTML::Pretty',
 													  generator_options => {notes => [$note]}),
 	  'Assignment OK');
