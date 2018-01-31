@@ -45,7 +45,7 @@ sub serialize_iterator_to_string {
   while (my $st = $iter->next) {
 	 $model->add_statement($st);
   }
-  return $self->{gen}->serialize_model_to_string($model);
+  return $self->serialize_model_to_string($model);
 }
 
 sub serialize_iterator_to_file {
@@ -54,7 +54,7 @@ sub serialize_iterator_to_file {
   while (my $st = $iter->next) {
 	 $model->add_statement($st);
   }
-  return $self->{gen}->serialize_model_to_file($fh, $model);
+  return $self->serialize_model_to_file($fh, $model);
 }
 
 
