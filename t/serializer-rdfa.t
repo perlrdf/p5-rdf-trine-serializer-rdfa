@@ -33,7 +33,7 @@ subtest 'Default generator' => sub {
 my $ns = URI::NamespaceMap->new( { ex => iri('http://example.org/') });
 
 subtest 'Hidden generator' => sub {
-  ok(my $s = RDF::Trine::Serializer->new('RDFa', style => 'HTML::Hidden'), 'Assignment OK');
+  ok(my $s = RDF::Trine::Serializer->new('RDFa', style => 'HTML::Hidden', namespacemap => $ns), 'Assignment OK');
   isa_ok($s, 'RDF::Trine::Serializer::RDFa');
   my $string = $s->serialize_model_to_string($testmodel);
   tests($string);
@@ -66,6 +66,7 @@ subtest 'Pretty generator with Note' => sub {
   ok(my $note = RDF::RDFa::Generator::HTML::Pretty::Note->new(iri('http://example.org/foo'), 'This is a Note'), 'Note creation OK');
   ok(my $s = RDF::Trine::Serializer->new('RDFa',
 													  style => 'HTML::Pretty',
+													  namespacemap => $ns,
 													  generator_options => {notes => [$note]}),
 	  'Assignment OK');
   my $string = $s->serialize_model_to_string($testmodel);
