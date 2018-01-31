@@ -8,3 +8,13 @@
     issued  2018-01-16;
     label   "Improve documentation".
 
+`RDF-Trine-Serializer-RDFa 0.03_01 cpan:KJETILK`
+    issued  2018-02-01;
+    label   "Support new RDFa generator" ;
+    changeset [
+	item [ label "Add more tests."@en ; a dcs:Addition ] ;
+	item [ label "Allow passing arguments to create_document."@en ; a dcs:Addition ] ;
+	item [ label "Use the Attean API with new compatibility layer."@en ; a dcs:Change ] ;
+        ] .
+        
+
