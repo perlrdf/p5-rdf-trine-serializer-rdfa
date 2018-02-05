@@ -8,7 +8,7 @@
     issued  2018-01-16;
     label   "Improve documentation".
 
-`RDF-Trine-Serializer-RDFa 0.03_01 cpan:KJETILK`
+`RDF-Trine-Serializer-RDFa 0.03_02 cpan:KJETILK`
     issued  2018-02-01;
     label   "Support new RDFa generator" ;
     changeset [
