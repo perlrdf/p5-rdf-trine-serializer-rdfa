@@ -11,7 +11,7 @@
     :test-requirement       [ :on "Test::RDF"^^:CpanId ];
     :test-requirement       [ :on "Module::Load::Conditional"^^:CpanId ];
     :test-requirement       [ :on "RDF::RDFa::Parser"^^:CpanId ];
-    :test-recommendation    [ :on "RDF::NS 20130802"^^:CpanId ];
+    :test-recommendation    [ :on "RDF::Prefixes"^^:CpanId ];
     :develop-recommendation [ :on "Dist::Inkt 0.001"^^:CpanId ];
     .
 
