@@ -18,3 +18,10 @@
         ] .
         
 
+`RDF-Trine-Serializer-RDFa 0.101 cpan:KJETILK`
+    issued  2019-02-21;
+    label   "Fix tests" ;
+    changeset [
+	item [ label "Used the wrong prefix generator module in tests."@en ; a dcs:Bugfix ] ;
+    ] .
+        
