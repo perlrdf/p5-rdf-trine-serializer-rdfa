@@ -11,7 +11,7 @@ use RDF::TrineX::Compatibility::Attean;
 our $AUTHORITY = 'cpan:KJETILK';
 our ($VERSION);
 BEGIN {
-  $VERSION = '0.100';
+  $VERSION = '0.101';
   $RDF::Trine::Serializer::serializer_names{ 'rdfa' } = __PACKAGE__;
   $RDF::Trine::Serializer::format_uris{ 'http://www.w3.org/ns/formats/RDFa' } = __PACKAGE__;
   foreach my $type (qw(application/xhtml+xml text/html)) {
