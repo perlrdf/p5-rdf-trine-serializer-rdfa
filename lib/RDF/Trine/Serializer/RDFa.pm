@@ -128,7 +128,7 @@ Serializes the iterator to RDFa, returning the result as a string.
 =head1 BUGS
 
 Please report any bugs to
-L<https://github.com/kjetilk/p5-rdf-trine-serializer-rdfa/issues>.
+L<https://github.com/perlrdf/p5-rdf-trine-serializer-rdfa/issues>.
 
 =head1 SEE ALSO
 
